@@ -13,8 +13,6 @@ use App\Controllers\JobController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
 Auth::routes();
 Route::get('/', [App\Http\Controllers\JobController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -23,4 +21,4 @@ Route::get('/createJobDetails', [App\Http\Controllers\JobController::class, 'cre
 Route::post('/submitJobDetails', [App\Http\Controllers\JobDetailsController::class, 'store'])->name('submitJobDetails');
 Route::get('/editJob/{id}', [App\Http\Controllers\JobDetailsController::class, 'editJob']);
 Route::post('/submitJob', [App\Http\Controllers\JobDetailsController::class, 'store'])->name('submitJob');
-Route::view('/viewJob/{id}', [App\Http\Controllers\JobDetailsController::class, 'viewJobById']);
+Route::view('/viewJob/{id}', [App\Http\Controllers\JobController::class, 'viewJobById']);

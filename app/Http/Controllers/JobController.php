@@ -43,9 +43,11 @@ class JobController extends Controller
         return view('createJobsDetails')->with("jobs",$jobs)->with("shiftOptions",$shiftOptions);
     }
 
-    public function viewJob($id){
+    //view the jobs on the client side by their id
+    public function viewJobById($id){
 
-        echo $id;
+       echo $id;
+       return view("individualJobView");
         
     }
 
