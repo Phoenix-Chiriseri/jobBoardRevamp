@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $job->job }}</h5>
                         <p class="card-text">
-                            
+                            <a href="{{ '/viewJob/'. $job->id }}">View Job</a>
                         </p>
                     </div>
                 </div>

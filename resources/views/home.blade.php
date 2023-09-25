@@ -18,6 +18,7 @@
                     <td>
                         <a href="{{ '/editJob/'. $job->id }}">Edit Job</a>
                     </td>
+                    
                 </tr>
             @endforeach
         </tbody>

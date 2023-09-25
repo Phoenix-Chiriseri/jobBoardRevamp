@@ -27,9 +27,6 @@ class JobController extends Controller
         return view('home')->with("jobsAndEntries",$jobsAndEntries);*/
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function createJobDetails()
     {
         $shiftOptions = [
@@ -44,6 +41,12 @@ class JobController extends Controller
         $jobs = collect($jobs);
         //return all the patients to the daily entry view where the house is equal to the authenticated users house
         return view('createJobsDetails')->with("jobs",$jobs)->with("shiftOptions",$shiftOptions);
+    }
+
+    public function viewJob($id){
+
+        echo $id;
+        
     }
 
     /**
