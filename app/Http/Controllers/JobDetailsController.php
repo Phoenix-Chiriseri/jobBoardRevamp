@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobDetails;
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class JobDetailsController extends Controller
@@ -27,11 +28,11 @@ class JobDetailsController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
         // Validate the form data
         //store the job with the details
         $validatedData = $request->validate([
-            'job_id' => 'required|exists:jobs,id', // Ensure that the selected job exists
+             // Ensure that the selected job exists
             'date' => 'required|date',
             'num_people' => 'required|integer',
             'shift' => 'required|string',
@@ -39,14 +40,13 @@ class JobDetailsController extends Controller
 
         // Create a new job detail
         $jobDetail = new JobDetails();
-        $jobDetail->job_id = $validatedData['job_id'];
+        $jobDetail->job_id = $request->input('id');
         $jobDetail->date = $validatedData['date'];
         $jobDetail->num_people = $validatedData['num_people'];
         $jobDetail->shift = $validatedData['shift'];
         // Save the job detail to the database
         $jobDetail->save();
-        return redirect('/home');
-        
+        //return redirect('/home');
     }
 
     /**
@@ -62,8 +62,24 @@ class JobDetailsController extends Controller
      */
     public function editJob($id)
     {
-
-        echo $id;
+        $job = Job::find($id);
+        $shiftOptions = [
+            'morning' => 'Morning Shift',
+            'late' => 'Late Shift',
+            'night' => 'Night Shift',
+            'long' => 'Long Day',
+        ];
+        return view('editJob')->with("shiftOptions",$shiftOptions)->with("job",$job);        
+        //echo $id;
+          /*$jobsAndEntries = Job::leftJoin('job_details', 'job_details.job_id', '=', 'jobs.id')
+        ->select(
+        'jobs.id as id',
+        'jobs.job as job_name', // Use 'jobs.job' instead of 'job.job'
+        'job_details.date as jobDate',
+        'job_details.num_people as jobNumPeople',
+        'job_details.shift as jobShift'
+        );
+        $jobsAndEntriesData = $jobsAndEntries->get();*/
         
     }
 

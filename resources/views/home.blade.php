@@ -8,21 +8,15 @@
         <thead>
             <tr>
                 <th>Job Name</th>
-                <th>Date</th>
-                <th>Number of People</th>
-                <th>Shift</th>
-                <th>Edit Job</th>
+                <th>Update Job</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($jobsAndEntriesData as $entry)
+            @foreach ($jobs as $job)
                 <tr>
-                    <td>{{ $entry->job_name }}</td>
-                    <td>{{ $entry->jobDate }}</td>
-                    <td>{{ $entry->jobNumPeople }}</td>
-                    <td>{{ $entry->jobShift }}</td>
+                    <td>{{ $job->job }}</td>
                     <td>
-                        <a href="{{ '/editJob/'. $entry->id }}">Edit Job</a>
+                        <a href="{{ '/editJob/'. $job->id }}">Edit Job</a>
                     </td>
                 </tr>
             @endforeach
@@ -64,7 +58,6 @@
                     </form>
                     <br>
                     </button>
-                    <a href="/createJobDetails" class="btn btn-danger">Create Job Details</a>
             </div>
         </div>
     </div>

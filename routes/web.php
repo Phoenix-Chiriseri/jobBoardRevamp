@@ -22,3 +22,4 @@ Route::post('/createJob', [App\Http\Controllers\JobController::class, 'store'])-
 Route::get('/createJobDetails', [App\Http\Controllers\JobController::class, 'createJobDetails'])->name('createJobDetails');
 Route::post('/submitJobDetails', [App\Http\Controllers\JobDetailsController::class, 'store'])->name('submitJobDetails');
 Route::get('/editJob/{id}', [App\Http\Controllers\JobDetailsController::class, 'editJob']);
+Route::post('/submitJob', [App\Http\Controllers\JobDetailsController::class, 'store'])->name('submitJob');

@@ -13,7 +13,10 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobsAndEntries = Job::leftJoin('job_details', 'job_details.job_id', '=', 'jobs.id')
+
+        $jobs = Job::all();
+        return view("welcome")->with("jobs",$jobs);
+        /*$jobsAndEntries = Job::leftJoin('job_details', 'job_details.job_id', '=', 'jobs.id')
         ->select(
         'jobs.id as job_id',
         'jobs.job as job_name', // Use 'jobs.job' instead of 'job.job'
@@ -21,7 +24,7 @@ class JobController extends Controller
         'job_details.num_people as jobNumPeople',
         'job_details.shift as jobShift'
         );
-        return view('home')->with("jobsAndEntries",$jobsAndEntries);
+        return view('home')->with("jobsAndEntries",$jobsAndEntries);*/
     }
 
     /**

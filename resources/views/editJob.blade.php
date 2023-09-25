@@ -18,9 +18,8 @@
                     window.onload = massge;
                     </script>
                     @endif
-                    <form method="POST" action="{{ route('submitJobDetails') }}">
+                    <form method="POST" action="{{ route('submitJob') }}">
                         @csrf
-                        <br>
                         <div class="form-group">
                             <label for="date">{{ __('Date') }}</label>
                             <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" required>
@@ -62,15 +61,14 @@
                                 </div>
                             @enderror
                         </div>
+                        <input type="hidden" value = "{{$job->id}}" name="id">
                         <br>
                         <button type="submit" class="btn btn-secondary">
                             <i class="fa-regular fa-user"></i>{{ __('Add/Remove Users ') }}</button>
-                        <button type="submit" class="btn btn-secondary">
-                            <i class="fa-regular fa-user"></i>{{ __('Add Job ') }}</button>
+                        <a href="/home" class="btn btn-secondary">
+                            <i class="fa-regular fa-user"></i>Home</a>
                     </form>
                     <br>
-                    </button>
-                    <a href="/createJobDetails" class="btn btn-danger">Create Job Details</a>
             </div>
         </div>
     </div>

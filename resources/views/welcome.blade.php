@@ -11,8 +11,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $job->job }}</h5>
                         <p class="card-text">
-                            <strong>Date:</strong> {{ $job->date }}<br>
-                            <strong>Shift:</strong> {{ $job->shift }}
+                            
                         </p>
                     </div>
                 </div>
