@@ -14,7 +14,7 @@ class JobController extends Controller
     public function index()
     {
 
-        $jobs = Job::all();
+        $jobs = Job::orderBy('id', 'desc')->get();
         return view("welcome")->with("jobs",$jobs);
         /*$jobsAndEntries = Job::leftJoin('job_details', 'job_details.job_id', '=', 'jobs.id')
         ->select(
