@@ -17,15 +17,6 @@ class JobController extends Controller
 
         $jobs = Job::orderBy('id', 'desc')->get();
         return view("welcome")->with("jobs",$jobs);
-        /*$jobsAndEntries = Job::leftJoin('job_details', 'job_details.job_id', '=', 'jobs.id')
-        ->select(
-        'jobs.id as job_id',
-        'jobs.job as job_name', // Use 'jobs.job' instead of 'job.job'
-        'job_details.date as jobDate',
-        'job_details.num_people as jobNumPeople',
-        'job_details.shift as jobShift'
-        );
-        return view('home')->with("jobsAndEntries",$jobsAndEntries);*/
     }
 
     public function createJobDetails()
@@ -53,19 +44,21 @@ class JobController extends Controller
            echo "no jobs found";
         }
         
-          $today = Carbon::today();
-          $endDate = $today->copy()->addDays(7);
+        $today = Carbon::today();
+        $endDate = $today->copy()->addDays(7);
         
-          $jobsWithDetails = Job::leftJoin('job_details', 'jobs.id', '=', 'job_details.job_id')
+        $jobsWithDetails = Job::leftJoin('job_details', 'jobs.id', '=', 'job_details.job_id')
             ->select(
-                'jobs.job as job',
                 'job_details.date as date',
-                'job_details.num_people as people',
-                'job_details.shift as shift'
+                DB::raw('SUM(CASE WHEN job_details.shift = "morning" THEN 1 ELSE 0 END) as morning_jobs'),
+                DB::raw('SUM(CASE WHEN job_details.shift = "night" THEN 1 ELSE 0 END) as night_jobs'),
+                DB::raw('SUM(CASE WHEN job_details.shift = "late" THEN 1 ELSE 0 END) as late_jobs'),
+                DB::raw('SUM(CASE WHEN job_details.shift = "long" THEN 1 ELSE 0 END) as long_jobs')
             )
             ->where('jobs.id', '=', $job->id) // Use $job->id here to access the job ID.
             ->where('job_details.date', '>=', $today)
             ->where('job_details.date', '<=', $endDate)
+            ->groupBy('date')
             ->get();
 
         return view('viewJobById')->with('jobsWithDetails', $jobsWithDetails);

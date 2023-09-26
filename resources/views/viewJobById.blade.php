@@ -1,20 +1,10 @@
 @extends('layouts.app') <!-- Use your layout file if you have one -->
-
 @section('content')
-<div class="container">
-    <div class="row">
-        @foreach ($jobsWithDetails as $jobDetail)
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $jobDetail->job }}</h5>
-                    <p class="card-text">Date: {{ $jobDetail->date }}</p>
-                    <p class="card-text">Number of People: {{ $jobDetail->people }}</p>
-                    <p class="card-text">Shift: {{ $jobDetail->shift }}</p>
-                </div>
-            </div>
-        </div>
-        @endforeach
-    </div>
-</div>
+@foreach($jobsWithDetails as $jobDetail)
+    Date: {{ $jobDetail->date }}
+    Morning Jobs: {{ $jobDetail->morning_jobs }}
+    Night Jobs: {{ $jobDetail->night_jobs }}
+    Late Jobs: {{ $jobDetail->late_jobs }}
+    Long Jobs: {{ $jobDetail->long_jobs }}
+@endforeach
 @endsection
