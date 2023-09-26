@@ -46,11 +46,23 @@ class JobController extends Controller
 
     //view the jobs on the client side by their id
     public function viewJobById($id){
-       
+        
+        $job = Job::find($id)->id;
+        $today = Carbon::today();
+        $endDate = $today->copy()->addDays(7);
         $jobsWithDetails = Job::join('job_details', 'jobs.id', '=', 'job_details.job_id')
-        ->select('jobs.*', 'job_details.*')
-        ->where('job_details.id',$id)
-        ->get();   
+        ->select(
+            'jobs.job as job',
+            'job_details.date as date',
+            'job_details.num_people as people',
+            'job_details.shift as shift',
+        )
+        ->where('job_details.job_id', '=', $job)
+        ->where('job_details.date', '>=', $today)
+        ->where('job_details.date', '<=', $endDate)
+        ->get();
+        return view('viewJobById')->with('jobsWithDetails', $jobsWithDetails);
+
     }
 
     /**
