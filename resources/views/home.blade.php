@@ -1,9 +1,7 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <h1>Jobs and Entries</h1>
-
     <table class="table">
         <thead>
             <tr>

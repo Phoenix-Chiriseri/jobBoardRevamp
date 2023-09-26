@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class JobController extends Controller
 {
@@ -45,10 +46,11 @@ class JobController extends Controller
 
     //view the jobs on the client side by their id
     public function viewJobById($id){
-
-       echo $id;
-       return view("individualJobView");
-        
+       
+        $jobsWithDetails = Job::join('job_details', 'jobs.id', '=', 'job_details.job_id')
+        ->select('jobs.*', 'job_details.*')
+        ->where('job_details.id',$id)
+        ->get();   
     }
 
     /**
