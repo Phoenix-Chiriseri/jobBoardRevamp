@@ -37,18 +37,18 @@ class JobController extends Controller
 
     //view the jobs on the client side by their id
     public function viewJobById($id){
-    $jobId = Job::find($id)->id; // Get the job ID from the retrieved Job model
-    $startDate = now()->toDateString();
-    $endDate = now()->addDays(7)->toDateString();
-    $jobSum = DB::table('jobs')
-    ->leftJoin('job_details', 'jobs.id', '=', 'job_details.job_id')
-    ->select('jobs.job', DB::raw('SUM(job_details.num_people) as total_num_people'))
-    ->where('jobs.id', $jobId) // Filter by the specific job ID
-    ->whereBetween('job_details.date', [$startDate, $endDate])
-    ->groupBy('jobs.job')
-    ->get();
-    dd($jobSum);
-        //return view('viewJobById')->with('jobsWithDetails', $jobsWithDetails);
+        
+        $jobId = Job::find($id)->id; // Get the job ID from the retrieved Job model
+        $startDate = now()->toDateString();
+        $endDate = now()->addDays(7)->toDateString();
+        $jobsWithDetails = DB::table('jobs')
+        ->leftJoin('job_details', 'jobs.id', '=', 'job_details.job_id')
+        ->select('jobs.job', 'job_details.date', 'job_details.shift', DB::raw('SUM(job_details.num_people)   as total_num_people'))
+        ->where('jobs.id', $jobId) // Filter by the specific job ID
+        ->whereBetween('job_details.date', [$startDate, $endDate])
+        ->groupBy('jobs.job', 'job_details.date', 'job_details.shift')
+        ->get();
+        return view('viewJobById')->with('jobsWithDetails', $jobsWithDetails);
     
     }
 
