@@ -31,16 +31,8 @@ class HomeController extends Controller
             'long' => 'Long Day',
         ];
 
+        //return all the jobs with the shift options
         $jobs = Job::all();
-        /*$jobsAndEntries = Job::leftJoin('job_details', 'job_details.job_id', '=', 'jobs.id')
-        ->select(
-        'jobs.id as id',
-        'jobs.job as job_name', // Use 'jobs.job' instead of 'job.job'
-        'job_details.date as jobDate',
-        'job_details.num_people as jobNumPeople',
-        'job_details.shift as jobShift'
-        );
-        $jobsAndEntriesData = $jobsAndEntries->get();*/
         return view('home')->with("shiftOptions",$shiftOptions)->with("jobs",$jobs);
     }
 }
