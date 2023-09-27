@@ -65,9 +65,10 @@ class JobController extends Controller
         $job->job = $validatedData['job'];
         // Save the job to the database
         $job->save();
+        return redirect('/home');
         // Redirect to a success page or do something else after saving
         //return redirect()->route('jobs.index')->with('success', 'Job created successfully');
-        echo "job saved";
+        //echo "job saved";
     }
 
     /**

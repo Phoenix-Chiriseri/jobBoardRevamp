@@ -7,6 +7,7 @@
             <tr>
                 <th>Job Name</th>
                 <th>Update Job</th>
+                <th>Delete Job</th>
             </tr>
         </thead>
         <tbody>
@@ -16,7 +17,9 @@
                     <td>
                         <a href="{{ '/editJob/'. $job->id }}">Edit Job</a>
                     </td>
-                    
+                    <td>
+                        <a href="{{ '/deleteJob/'. $job->id }}">Delete Job</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
