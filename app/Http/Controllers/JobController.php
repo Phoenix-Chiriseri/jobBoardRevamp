@@ -49,7 +49,6 @@ class JobController extends Controller
         ->groupBy('jobs.job', 'job_details.date', 'job_details.shift')
         ->get();
         return view('viewJobById')->with('jobsWithDetails', $jobsWithDetails);
-    
     }
 
     /**
