@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobDetailsController;
+use App\Http\Controllers\CreatedJobsController;
 use App\Http\Controllers\SearchController;
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,17 @@ use App\Http\Controllers\SearchController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
 Route::get('/', [DashboardController::class, 'welcome'])->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
-Route::get('/viewJob/{id}', [JobController::class, 'viewJobById']);
+Route::get('/viewJob/{id}', [JobController::class, 'viewJobById'])->name('viewjob');
+ //Manage client job request
+Route::get('/adddetails/{id}', [JobController::class, 'addJob'])->name('addjob');
+Route::post('/addjobdetails', [CreatedJobsController::class, 'store'])->name('add.job.details');
+Route::get('/jobsubmitted',[CreatedJobsController::class,'submittedJobMessage'])->name('jobsubmitted');
+Route::get('/requestedjob', [CreatedJobsController::class, 'requestedJob'])->name('requestedjob');
+Route::get('account/verify/{token}', [CreatedJobsController::class, 'verifyAccount'])->name('user.verify'); 
 Route::get('sign-up', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 Route::post('sign-up', [RegisterController::class, 'store'])->middleware('guest');
 Route::get('sign-in', [SessionsController::class, 'create'])->middleware('guest')->name('login');
@@ -39,7 +47,9 @@ Route::get('/reset-password/{token}', function ($token) {
 	return view('sessions.password.reset', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
 //routes for the application tied to the auth middleware
-Route::group(['middleware' => 'auth'], function () {
+
+Route::middleware(['auth'])->group(function () {
+    
 	Route::get('/createJob', [JobController::class, 'index'])->name("createJob");
     Route::post('/submitJob', [JobController::class, 'store'])->name("submitJob");
     Route::get('/deleteJob/{id}', [JobDetailsController::class, 'deleteJob']);
@@ -51,4 +61,16 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');
 	Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
 	Route::post('user-profile', [ProfileController::class, 'update']);
+	Route::get('/approval',[CreatedJobsController::class,'approval'])->name('approval');
+	Route::get('/requested-jobs',[CreatedJobsController::class,'requestedJobs'])->name('requested-jobs');
+	Route::get('/approvejobs',[CreatedJobsController::class,'approveJobs'])->name('approvejobs');
+	Route::get('/created-jobs',  [CreatedJobsController::class,'index'])->name('admin.requestedjobs.index');
+	Route::get('/created-jobs/{job_id}/approve', [CreatedJobsController::class,'approve'])->name('admin.requestedjobs.approve');
+	Route::get('/approvedjobs',[CreatedJobsController::class,'approvedJobs'])->name('approvedjobs');
+	Route::get('/alljobrequests',[CreatedJobsController::class,'allJobRequests'])->name('alljobrequests');
+
+    Route::middleware(['approved'])->group(function () {
+        Route::get('/home', 'HomeController@index')->name('home');
+    });
 });
+

@@ -22,7 +22,7 @@
                             </div>
                             </div>
                             <div
-                                class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+                                class="col-xl-6 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
                                 <div class="card card-plain">
                                     <div class="card-header">
                                         <h4 class="font-weight-bolder">Sign Up</h4>

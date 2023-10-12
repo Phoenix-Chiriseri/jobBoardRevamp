@@ -24,7 +24,6 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            <hr>
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} btn btn-secondary" href="{{ route('createJob') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -33,6 +32,31 @@
                     <span class="nav-link-text ms-1">Create Job</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} btn btn-secondary" href="{{route('approvejobs')}}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">add</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Approve Requested Jobs</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} btn btn-secondary" href="{{route('approvedjobs')}}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">add</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Approved Job Requests</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} btn btn-secondary" href="{{route('requested-jobs')}}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">add</i>
+                    </div>
+                    <span class="nav-link-text ms-1">View Requested Jobs</span>
+                </a>
+            </li>
+            
             <!--<li class="nav-item">
                 <a class="nav-link text-white>
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

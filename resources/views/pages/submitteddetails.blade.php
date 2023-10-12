@@ -20,79 +20,14 @@
         <x-navbars.navs.auth titlePage="All Jobs"></x-navbars.navs.auth>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-xl-6 mb-xl-0 mb-4">
-                            <div class="card bg-transparent shadow-xl">
-                                <div class="overflow-hidden position-relative border-radius-xl">
-                                    <img src=""
-                                        class="position-absolute opacity-2 start-0 top-0 w-100 z-index-1 h-100"
-                                        alt="">
-                                    <span class="mask bg-gradient-dark opacity-10"></span>
-                                    <div class="card-body position-relative z-index-1 p-3">
-                                        <h5 class="text-white mt-4 mb-5 pb-2">
-                                        Welcome {{$name}}
-                                        </h5>
-                                        <hr>
-                                        <button onclick="generatePDF()" class = "btn btn-success btn-lg"><i class = "fa fa-print"></i>Export Jobs List</button>
-                                        <button onclick="generatePDF()" class = "btn btn-success btn-lg"><i class = "fa fa-print"></i>Reqested Jobs List</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="row">
-                                <div class="col-md-6 col-6">
-                                    <div class="card">
-                                        <div class="card-header mx-4 p-3 text-center">
-                                            <div
-                                                class="icon icon-shape icon-lg bg-gradient-success shadow text-center border-radius-lg">
-                                                <i class="material-icons opacity-10">account_balance</i>
-                                            </div>
-                                        </div>
-                                        <div class="card-body pt-0 p-4 text-center">
-                                            <h6 class="text-center mb-0">Jobs Count</h6>
-                                            <span class="text-xs"></span>
-                                            <hr class="horizontal dark my-3">
-                                            <h5 class="mb-0">{{$numberOfJobs}}</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-6">
-                                    <div class="card">
-                                        <div class="card-header mx-4 p-4 text-center">
-                                            <div
-                                                class="icon icon-shape icon-lg bg-gradient-success shadow text-center border-radius-lg">
-                                                <i class="material-icons opacity-10">account_balance_wallet</i>
-                                            </div>
-                                        </div>
-                                        <div class="card-body pt-0 p-3 text-center">
-                                            <h6 class="text-center mb-0">Last Job Entered</h6>
-                                            <hr class="horizontal dark my-3">
-                                            @if($latest)
-                                                <h5 class="mb-0">{{ $latest->job }}</h5>
-                                            @else
-                                                <h5 class="mb-0">No Job Found</h5>
-                                            @endif
-                                            </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-              
-            </div>
+           
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-success shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Available Jobs</h6>
+                                <h6 class="text-white text-capitalize ps-3">Requested Jobs</h6>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
@@ -100,44 +35,42 @@
                                 <table class="table align-items-center mb-0"  id = "pdf-content">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Name</th>
-                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Created At</th>
-                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Updated At</th>
-                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Add Job Details</th>
-                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Delete Job</th>
+                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Username</th>
+                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Email</th>
+                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Phone number</th>
+                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Shift</th>
+                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Date Created</th>
+                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Approve</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($jobs as $job)
+                                        @foreach ($requestedJobs  as $job)
+                                       
                                             <tr>
                                                 <td>
-                                                    <p class="text-xs font-weight-bold mb-0" style="color:black;">{{ $job->job }}</p>
+                                                  <p class="text-xs font-weight-bold mb-0" style="color:black;">{{ $job->username }}</p>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs  mb-0" style="color:black;">{{ $job->created_at }}</p>
+                                                  <p class="text-xs  mb-0" style="color:black;">{{ $job->email }}</p>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs mb-0" style="color:black;">{{ $job->updated_at }}</p>
+                                                  <p class="text-xs mb-0" style="color:black;">{{ $job->phone_number }}</p>
                                                 </td>
-                                                <td class="align-middle">
-                                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user" style="color:black;">
-                                                        <a href="{{ '/editJob/'. $job->id }}" class = "btn btn btn-outline-dark"><i class = "fa fa-plus"></i>Add</a>
-                                                    </a>
+                                                <td>
+                                                  <p class="text-xs mb-0" style="color:black;">{{ $job->shift}}</p>
                                                 </td>
-                                                <td class="align-middle">
-                                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user" style="color:black;">
-                                                        <a href="{{ '/deleteJob/'. $job->id }}" class = "btn btn-dark btn-link"><i class = "fa fa-trash"></i>Delete</a>
-                                                    </a>
+                                                <td>
+                                                  <p class="text-xs mb-0" style="color:black;">{{ $job->created_at}}</p>
                                                 </td>
+                                             
+                                               
                                             </tr>
                                         @endforeach
                                     </tbody>
                                     
                                 </table>
                             </div>
-                            {{ $jobs->links() }}
+                           
                         </div>
                     </div>
                 </div>

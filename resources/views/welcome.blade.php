@@ -21,7 +21,7 @@
         <a class="navbar-brand mt-2 mt-lg-0" href="/">
           <img
             src="{{ asset('assets') }}/img/weKareLogo.png"
-            height="15"
+            height="50"
             alt="MDB Logo"
             loading="lazy"
           />
@@ -39,8 +39,8 @@
       <!-- Right elements -->
       <div class="d-flex align-items-center">
         <!-- Icon -->
-        <a class="text-reset me-3" href="#">
-          <i class="fas fa-briefcase"></i>
+        <a class="text-reset me-3" href="{{route('login')}}">
+          <i class="fas fa-user"> Login </i>
         </a>
         <!-- Notifications -->
         <!-- Avatar -->
@@ -64,7 +64,8 @@
                 </form>
             </div>
         </div>
-    </div>  
+    </div> 
+    <br><br> 
     <div class="main-content d-flex justify-content-center align-items-center bg-gray-100 min-vh-100" style="margin-top: -200px;">
         <div class="container-fluid">
             <div class="row justify-content-center">

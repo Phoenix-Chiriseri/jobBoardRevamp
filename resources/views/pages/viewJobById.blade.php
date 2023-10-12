@@ -21,7 +21,7 @@
             <a class="navbar-brand mt-2 mt-lg-0" href="/">
               <img
                 src="{{ asset('assets') }}/img/weKareLogo.png"
-                height="15"
+                height="50"
                 alt="MDB Logo"
                 loading="lazy"
               />
@@ -39,8 +39,8 @@
           <!-- Right elements -->
           <div class="d-flex align-items-center">
             <!-- Icon -->
-            <a class="text-reset me-3" href="#">
-              <i class="fas fa-briefcase"></i>
+            <a class="text-reset me-3" href="{{route('login')}}">
+              <i class="fas fa-user"> Login</i>
             </a>
             <!-- Notifications -->
             <!-- Avatar -->
@@ -62,7 +62,7 @@
                 <div class="col-12 mt-4">
                     <div class="mb-5 ps-3">
                         <h4 class="mb-1 text-center" style="text-decoration: underline;">Scroll Down To See All Available Jobs</h4>
-                        <a href= "/">Hello World</a>
+                        
                     </div>
                     @if ($jobsWithDetails->isEmpty())
                         <p>No job records found.</p>
@@ -72,12 +72,8 @@
                                 @foreach ($jobsWithDetails->groupBy('date') as $date => $records)
                                     <div class="col-md-3 mb-4">
                                         <div class="card">
-                                            <div class="card-header p-0 mt-n4 mx-6">
-                                                <a class="d-block shadow-xl border-radius-xl">
-                                                    <!-- You can add your image here -->
-                                                </a>
-                                            </div>
-                                            <div class="card-body p-3">
+                                          
+                                            <div class="card-body p-4">
                                                 <h6 class="card-subtitle mb-2 text-center" style="color:black; text-decoration: underline;"> <!-- Add 'text-decoration: underline;' to underline the date -->
                                                     {{ \Carbon\Carbon::parse($date)->setTimezone('Europe/London')->format('l d-m-y') }}
                                                 </h6>
@@ -90,6 +86,11 @@
                                                         <h6 class="card-text" style="color:black;">Total Number of People:</h6>
                                                         <p class="card-text" style="color:black;">{{ $record->total_num_people }}</p>
                                                     </div>
+                                                
+                                                    <div class="d-flex justify-content-between">
+                                                        <a href="{{route('addjob', $job->id )}}" class="class btn btn-success">Request for Job </a>
+                                                    </div>
+
                                                     <hr> <!-- Add this line to insert an <hr> after each record -->
                                                 @endforeach
                                                 <div class="d-flex align-items-center justify-content-between mt-2">

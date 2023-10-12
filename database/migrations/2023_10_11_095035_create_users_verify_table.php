@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_details', function (Blueprint $table) {
-            $table->id();
-            $table->integer('job_id');
-            $table->date('date');
-            $table->integer('num_people');
-            $table->string('shift');
+        Schema::create('users_verify', function (Blueprint $table) {
+            $table->integer('user_id');
+            $table->string('token');
             $table->timestamps();
+        });
+  
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('is_email_verified')->default(0);
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_details');
+        Schema::dropIfExists('users_verify');
     }
 };

@@ -17,23 +17,24 @@ class SessionsController extends Controller
         return view('sessions.create');
     }
 
-    public function store()
+    public function store( Request $request)
     {
-        $attributes = request()->validate([
+        $input = $request->all();
+     
+        $this->validate($request, [
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
-
-        if (! auth()->attempt($attributes)) {
-            throw ValidationException::withMessages([
-                'email' => 'Your provided credentials could not be verified.'
-            ]);
+     
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        {
+            if (auth()->user()->admin == 1) {
+                return redirect('/dashboard');
+            }
+        }else{
+            return redirect('/sign-in')
+                ->with('error','Email-Address And Password Are Wrong.');
         }
-
-        session()->regenerate();
-
-        return redirect('/dashboard');
-
     }
 
     public function show(){
@@ -63,7 +64,7 @@ class SessionsController extends Controller
             request()->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {
                 $user->forceFill([
-                    'password' => ($password)
+                'password' => ($password)
                 ])->setRememberToken(Str::random(60));
     
                 $user->save();

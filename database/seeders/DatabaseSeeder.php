@@ -14,11 +14,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-         User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@material.com',
-            'password' => ('secret')
-        ]);
+    {   
+        $this->call(UserSeeder::class);
     }
 }

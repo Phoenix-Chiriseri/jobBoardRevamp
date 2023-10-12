@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\JobDetails;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class JobController extends Controller
@@ -48,6 +49,19 @@ class JobController extends Controller
 
     }
 
+    public function addJob($id){
+
+        $available_jobs = Job::find($id);
+        $shifts = JobDetails::find($id);
+        return view("pages.addjobdetails", compact('available_jobs','shifts'));
+
+    }
+
+    public function jobRequestDetails(Request $request){
+
+    }
+
+
     public function submitChangeJobName(Request $request,$id){
 
         
@@ -79,7 +93,7 @@ class JobController extends Controller
         ->whereBetween('job_details.date', [$startDate, $endDate])
         ->groupBy('jobs.job', 'job_details.date', 'job_details.shift')
         ->get();
-        return view('pages.viewJobById')->with('jobsWithDetails', $jobsWithDetails)->with("jobName",$jobName);
+        return view('pages.viewJobById',compact('job'))->with('jobsWithDetails', $jobsWithDetails)->with("jobName",$jobName);
     }
 
 }
