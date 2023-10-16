@@ -51,8 +51,9 @@ class JobController extends Controller
 
     public function addJob($id){
 
-        $available_jobs = Job::find($id);
-        $shifts = JobDetails::find($id);
+        $shifts = JobDetails::findOrFail($id);
+        $available_jobs = Job::findOrFail($id);
+       
         return view("pages.addjobdetails", compact('available_jobs','shifts'));
 
     }

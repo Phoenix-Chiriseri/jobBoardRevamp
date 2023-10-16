@@ -34,7 +34,16 @@ class JobDetailsController extends Controller
             'night' => 'Night Shift',
             'long' => 'Long Day',
         ];
-        return view('pages.editJob')->with("shiftOptions",$shiftOptions)->with("job",$job)->with(
+
+        $num_of_people = JobDetails:: 
+                          leftJoin('job_details','job_details.job_id','=','jobs.id')
+                          ->select(
+                            'jobs.job as jobname',
+                            'job_details.num_people',
+                            
+                          );
+       
+        return view('pages.editJob',compact('num_of_people'))->with("shiftOptions",$shiftOptions)->with("job",$job)->with(
         "name",$name
         );   
         

@@ -13,8 +13,9 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         \App\Models\User::create([
-            'name' => 'Itai',
+            'name' => 'Munashe',
             'email' => 'munachaps@gmail.com',
+            'admin' => '1',
             'email_verified_at' => now(),
             'phone' => NULL,
             'location' => NULL,
@@ -23,8 +24,9 @@ class UserSeeder extends Seeder
             
         ]);
         \App\Models\User::create([
-            'name' => 'Munashe',
+            'name' => 'Itai',
             'email' => 'itaineilchiriseri@gmail.com',
+            'admin' =>'1',
             'email_verified_at' => now(),
             'phone' => NULL,
             'location' => NULL,

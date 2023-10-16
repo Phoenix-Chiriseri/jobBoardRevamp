@@ -40,7 +40,7 @@
                                             <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Phone number</th>
                                             <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Shift</th>
                                             <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Date Created</th>
-                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Approve</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\CreatedJobs;
 use App\Models\User;
 use App\Models\Job;
+use App\Models\JobDetails;
 use App\Models\UserVerify;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\NewJobRequest;
@@ -25,9 +27,15 @@ class CreatedJobsController extends Controller
         return view('pages.submitteddetails', compact('requestedJobs'));
     }
 
+    public function approval()
+{
+    return view('pages.approval');
+}
+
     public function approve($job_id)
     {
         $job = CreatedJobs::findOrFail($job_id);
+        
 
         $job->update(['approved_at' => now()]);
 
@@ -62,11 +70,45 @@ class CreatedJobsController extends Controller
         return view('pages.submitteddetails', compact('requestedJobs'));
     }
 
+    public function updateJobRequests(){
+
+        $numberOfJobs = DB::table('jobs')->count();
+        $lastEnteredJob = DB::table('jobs')->latest()->first();
+        $jobs = Job::orderBy('id', 'desc')->paginate(5);
+
+        return view('admin.updatejobs',compact('numberOfJobs','lastEnteredJob','jobs'));
+    }
+
+    public function updateJob($id){
+     
+        $jobs = Job::findOrFail($id);
+        $job_details = JobDetails::findOrFail($id);
+       // $shifts = JobDetails::findOrFail($id);
+
+        $shiftOptions = [
+            'Morning' => 'Morning Shift',
+            'Late Shift' => 'Late Shift',
+            'Night' => 'Night Shift',
+            'Long' => 'Long Day',
+        ];
+
+        $num_of_people = JobDetails:: 
+                          leftJoin('job_details','job_details.job_id','=','jobs.id')
+                          ->select(
+                            'jobs.job as jobname',
+                            'job_details.num_people',
+                          );
+       
+        return view('admin.update',compact('num_of_people','jobs','shiftOptions','job_details'));   
+        
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'username' => 'required',
             'email' => 'required',

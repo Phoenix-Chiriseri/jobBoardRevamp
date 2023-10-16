@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,7 +14,8 @@ return new class extends Migration
     {
         Schema::create('job_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('job_id');
+            $table->unsignedBigInteger('job_id');
+            $table->foreign('job_id')->references('id')->on('jobs');
             $table->date('date');
             $table->integer('num_people');
             $table->string('shift');
@@ -29,3 +31,4 @@ return new class extends Migration
         Schema::dropIfExists('job_details');
     }
 };
+

@@ -91,10 +91,7 @@
                                     <p class="mb-2 text-sm"></p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div>
-                                            <p class="mb-1 text-sm" style="color:black;">Job Created At (UK Time):</p>
-                                            <p class="text-sm" style="color: black;">
-                                                {{ \Carbon\Carbon::parse($job->created_at)->setTimezone('Europe/London')->format('l d-m-y H:i:s') }}
-                                            </p>
+                                           
                                         </div>
                                         <a type="button" href="{{ '/viewJob/'. $job->id }}" class="btn btn-success btn-sm mb-0"><i class="fa fa-users fa-2x"></i>View Workers</a>
                                     </div>

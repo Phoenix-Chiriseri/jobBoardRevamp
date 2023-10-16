@@ -68,6 +68,8 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/created-jobs/{job_id}/approve', [CreatedJobsController::class,'approve'])->name('admin.requestedjobs.approve');
 	Route::get('/approvedjobs',[CreatedJobsController::class,'approvedJobs'])->name('approvedjobs');
 	Route::get('/alljobrequests',[CreatedJobsController::class,'allJobRequests'])->name('alljobrequests');
+	Route::get('/updatejobrequests',[CreatedJobsController::class,'updateJobRequests'])->name('updatejobrequests');
+	Route::get('/updateJob/{id}', [CreatedJobsController::class, 'updateJob'])->name('updatedjobrequest');
 
     Route::middleware(['approved'])->group(function () {
         Route::get('/home', 'HomeController@index')->name('home');
