@@ -9,6 +9,8 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobDetailsController;
 use App\Http\Controllers\CreatedJobsController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\WelcomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,12 +21,8 @@ use App\Http\Controllers\SearchController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
-Route::get('/', [DashboardController::class, 'welcome'])->middleware('guest');
+Route::get('/',[WelcomeController::class,'index'])->name('index');
+Route::get('/sign-in', function () {return redirect('sign-in');})->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::get('/viewJob/{id}', [JobController::class, 'viewJobById'])->name('viewjob');
  //Manage client job request
@@ -70,7 +68,6 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/alljobrequests',[CreatedJobsController::class,'allJobRequests'])->name('alljobrequests');
 	Route::get('/updatejobrequests',[CreatedJobsController::class,'updateJobRequests'])->name('updatejobrequests');
 	Route::get('/updateJob/{id}', [CreatedJobsController::class, 'updateJob'])->name('updatedjobrequest');
-
     Route::middleware(['approved'])->group(function () {
         Route::get('/home', 'HomeController@index')->name('home');
     });

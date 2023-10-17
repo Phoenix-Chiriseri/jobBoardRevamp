@@ -1,10 +1,5 @@
 <script>
-   function calculate() {
-        var available_people  = document.getElementById('num_people').value;
-        var requested_people  = document.getElementById('requested_people').value||0;
-        var people_remaining  = available_people - requested_people;
-        //document.getElementById("remaining_people").value = parseInt(people_remaining);  
-    }
+   console.log('How are you');
 </script>
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
     <x-navbars.sidebar activePage="user-profile"></x-navbars.sidebar>

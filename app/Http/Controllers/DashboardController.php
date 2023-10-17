@@ -21,6 +21,7 @@ class DashboardController extends Controller
         ->with("latest",$lastEnteredJob)->with("name",$name);
     }
 
+    
     public function welcome(){
 
         $jobs = Job::orderBy('id', 'desc')->get();
