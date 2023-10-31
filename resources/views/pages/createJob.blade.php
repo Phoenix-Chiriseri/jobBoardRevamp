@@ -18,16 +18,7 @@
                                 class="w-100 border-radius-lg shadow-sm">
                         </div>
                     </div>
-                    <div class="col-auto my-auto">
-                        <div class="h-100">
-                            <h5 class="mb-1">
-                                {{ $name }}
-                            </h5>
-                            <p class="mb-0 font-weight-normal text-sm">
-                               Administrator
-                            </p>
-                        </div>
-                    </div>
+                 
                 <div class="card card-plain h-100">
                     <div class="card-header pb-0 p-3">
                         <div class="row">

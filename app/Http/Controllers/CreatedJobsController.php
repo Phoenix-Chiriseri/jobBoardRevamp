@@ -115,10 +115,10 @@ class CreatedJobsController extends Controller
             'phone_number'  => 'required',
             'job_name' => 'required',
             'shift' => 'required',
-           
         ]);
            
         $data = $request->all();
+        
         $createUser = $this->create($data);
 
         $token = Str::random(64);

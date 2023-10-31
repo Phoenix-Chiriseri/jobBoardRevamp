@@ -78,17 +78,19 @@
                                                     {{ \Carbon\Carbon::parse($date)->setTimezone('Europe/London')->format('l d-m-y') }}
                                                 </h6>
                                                 @foreach ($records as $record)
+                                                <br>
                                                     <div class="d-flex justify-content-between">
                                                         <h6 class="card-text" style="color:black;">Shift:</h6>
                                                         <p class="card-text" style="color:black;">{{ $record->shift }}</p>
                                                     </div>
+                                                    <br>
                                                     <div class="d-flex justify-content-between">
                                                         <h6 class="card-text" style="color:black;">Total Number of People:</h6>
-                                                        <p class="card-text" style="color:black;">{{ $record->total_num_people }}</p>
+                                                        <p class="card-text" style="color:black;">{{ $record->num_of_people }}</p>
                                                     </div>
-                                                
+                                                    <br>
                                                     <div class="d-flex justify-content-between">
-                                                        <a href="{{route('addjob', $job->id )}}" class="class btn btn-success">Request for Job </a>
+                                                        <a href="{{ route('requestjob', $job->id) }}" class="class btn btn-success">Request for Job </a>
                                                     </div>
 
                                                     <hr> <!-- Add this line to insert an <hr> after each record -->

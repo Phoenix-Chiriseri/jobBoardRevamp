@@ -20,7 +20,7 @@
         <!-- Navbar brand -->
         <a class="navbar-brand mt-2 mt-lg-0" href="/">
           <img
-            src="{{ asset('assets') }}/img/weKareLogo.png"
+            src="{{ asset('assets/img/weKareLogo.png') }}"
             height="50"
             alt="MDB Logo"
             loading="lazy"
@@ -29,7 +29,7 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="/">View All Jobs</a>
+            <a class="nav-link" href="{{route('index')}}">View All Jobs</a>
           </li>
         </ul>
         <!-- Left links -->
@@ -86,14 +86,14 @@
                                 <div class="card-body card-body-cascade">
                                     <p class="mb-0 text-sm">Job Name</p>
                                     <a href="javascript:;">
-                                        <h5>{{ $job->job }}</h5>
+                                        <h5>{{ $job->job_name }}</h5>
                                     </a>
                                     <p class="mb-2 text-sm"></p>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div>
                                            
                                         </div>
-                                        <a type="button" href="{{ '/viewJob/'. $job->id }}" class="btn btn-success btn-sm mb-0"><i class="fa fa-users fa-2x"></i>View Workers</a>
+                                        <a type="button" href="{{ '/viewjob/'. $job->id }}" class="btn btn-success btn-sm mb-0"><i class="fa fa-users fa-2x"></i>View Workers</a>
                                     </div>
                                     <div class="avatar-group mt-2">
                                         <!-- Add your avatar images here -->

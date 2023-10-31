@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\RealJobs;
 use App\Models\JobDetails;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -16,9 +17,8 @@ class JobController extends Controller
      */
     public function index()
     {
-        //
         $name = Auth::user()->name;
-        return view("pages.createJob")->with("name",$name);
+        return view("admin.add_new_job")->with("name",$name);
     }
 
     /**
@@ -51,10 +51,10 @@ class JobController extends Controller
 
     public function addJob($id){
 
-        $shifts = JobDetails::findOrFail($id);
-        $available_jobs = Job::findOrFail($id);
+        $job_details = RealJobs::findOrFail($id);
+     
        
-        return view("pages.addjobdetails", compact('available_jobs','shifts'));
+        return view("pages.addjobdetails", compact('job_details'));
 
     }
 
@@ -80,19 +80,22 @@ class JobController extends Controller
     public function viewJobById($id){        
        
         //get the job from the database using the id
-        $job = Job::find($id); 
+        $job = RealJobs::find($id); 
         //Get the job ID from the retrieved Job model
         //get the job name and the job id
         $jobId = $job->id;
         $jobName = $job->job;
         $startDate = now()->toDateString();
         $endDate = now()->addDays(6)->toDateString();
-        $jobsWithDetails = DB::table('jobs')
-        ->leftJoin('job_details', 'jobs.id', '=', 'job_details.job_id')
-        ->select('jobs.job', 'job_details.date', 'job_details.shift', DB::raw('CASE WHEN SUM(job_details.num_people) < 0 THEN 0 ELSE SUM(job_details.num_people) END as total_num_people'))
-        ->where('jobs.id', $jobId)
-        ->whereBetween('job_details.date', [$startDate, $endDate])
-        ->groupBy('jobs.job', 'job_details.date', 'job_details.shift')
+        $jobsWithDetails = DB::table('real_jobs')
+        ->select('real_jobs.job_name',
+                 'real_jobs.num_of_people', 
+                 'real_jobs.shift',
+                 'real_jobs.location',
+                 'real_jobs.created_at', 
+                )
+        ->where('real_jobs.id', $jobId)
+        ->whereBetween('real_jobs.date', [$startDate, $endDate])
         ->get();
         return view('pages.viewJobById',compact('job'))->with('jobsWithDetails', $jobsWithDetails)->with("jobName",$jobName);
     }

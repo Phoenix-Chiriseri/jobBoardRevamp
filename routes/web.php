@@ -8,6 +8,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobDetailsController;
 use App\Http\Controllers\CreatedJobsController;
+use App\Http\Controllers\RealJobsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WelcomeController;
 
@@ -23,10 +24,9 @@ use App\Http\Controllers\WelcomeController;
 */
 Route::get('/',[WelcomeController::class,'index'])->name('index');
 Route::get('/sign-in', function () {return redirect('sign-in');})->middleware('guest');
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
-Route::get('/viewJob/{id}', [JobController::class, 'viewJobById'])->name('viewjob');
+Route::get('/viewjob/{id}', [JobController::class, 'viewJobById'])->name('viewjob');
  //Manage client job request
-Route::get('/adddetails/{id}', [JobController::class, 'addJob'])->name('addjob');
+Route::get('/requestjob/{id}', [JobController::class, 'addJob'])->name('requestjob');
 Route::post('/addjobdetails', [CreatedJobsController::class, 'store'])->name('add.job.details');
 Route::get('/jobsubmitted',[CreatedJobsController::class,'submittedJobMessage'])->name('jobsubmitted');
 Route::get('/requestedjob', [CreatedJobsController::class, 'requestedJob'])->name('requestedjob');
@@ -47,8 +47,9 @@ Route::get('/reset-password/{token}', function ($token) {
 //routes for the application tied to the auth middleware
 
 Route::middleware(['auth'])->group(function () {
-    
-	Route::get('/createJob', [JobController::class, 'index'])->name("createJob");
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+	Route::get('/createjob', [RealJobsController::class, 'index'])->name("createjob");
+	Route::post('/submitjob', [RealJobsController::class, 'createJob'])->name("submitjob");
     Route::post('/submitJob', [JobController::class, 'store'])->name("submitJob");
     Route::get('/deleteJob/{id}', [JobDetailsController::class, 'deleteJob']);
 	Route::get('/editJob/{id}', [JobDetailsController::class, 'editJob']);

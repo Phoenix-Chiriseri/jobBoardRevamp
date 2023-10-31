@@ -29,10 +29,10 @@ class JobDetailsController extends Controller
         $name = Auth::user()->name;
         $job = Job::find($id);
         $shiftOptions = [
-            'morning' => 'Morning Shift',
+            'Morning' => 'Morning Shift',
             'late' => 'Late Shift',
-            'night' => 'Night Shift',
-            'long' => 'Long Day',
+            'Night' => 'Night Shift',
+            'Long' => 'Long Day',
         ];
 
         $num_of_people = JobDetails:: 

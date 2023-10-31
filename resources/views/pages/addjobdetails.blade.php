@@ -20,7 +20,7 @@
         <!-- Navbar brand -->
         <a class="navbar-brand mt-2 mt-lg-0" href="/">
           <img
-            src="{{ asset('assets') }}/img/weKareLogo.png"
+            src="{{ asset('assets/img/weKareLogo.png') }}"
             height="50"
             alt="MDB Logo"
             loading="lazy"
@@ -56,25 +56,25 @@
                     @csrf
                     <div class="form-group">
                         <label class="form-label">Username</label>
-                        <input type="text" class="form-control border border-2 p-2" id="textbox" name="username" placeholder="Username">
+                        <input type="text" class="form-control border border-2 p-2" id="textbox" name="username" placeholder="">
                     </div>
                     <div class="form-group">
                         <label class="form-label">User email</label>
-                        <input type="email" class="form-control border border-2 p-2" id="textbox" name="email" placeholder="Email address">
+                        <input type="email" class="form-control border border-2 p-2" id="textbox" name="email" placeholder="">
                     </div>
                     <div class="form-group">
                         <label class="form-label">User Phone-number</label>
-                        <input type="text" class="form-control border border-2 p-2" id="textbox" name="phone_number" placeholder="Phone-number">
+                        <input type="text" class="form-control border border-2 p-2" id="textbox" name="phone_number" placeholder="">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Job name</label>
-                        <input type="text" class="form-control border border-2 p-2" id="textbox" name="job_name" placeholder="job_name" value="{{$available_jobs->job}}" readonly>
+                        <input type="text" class="form-control border border-2 p-2" id="textbox" name="job_name" placeholder=" " value="{{$job_details->job_name}}" readonly>
                     </div>
                     <div class="form-group">
-                      <label class="form-label">Work Shift</label>
-                      <input type="text" class="form-control border border-2 p-2" id="textbox" name="shift" placeholder="shift" value="{{$shifts->shift}}" readonly>
+                      <label class="form-label">Shift</label>
+                      <input type="text" class="form-control border border-2 p-2" id="textbox" name="shift" placeholder=" " value="{{$job_details->shift}}" readonly>
                   </div>
-                    <div class="col-md-6">
+                  <div class="col-md-6">
                         <button type="submit" class="btn btn-success btn-sm">Submit</button>
                         <a href="/" class="btn btn-success btn-sm">Back</a>
                     </div>
