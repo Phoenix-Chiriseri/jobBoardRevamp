@@ -52,9 +52,9 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/submitjob', [RealJobsController::class, 'createJob'])->name("submitjob");
     Route::post('/submitJob', [JobController::class, 'store'])->name("submitJob");
     Route::get('/deleteJob/{id}', [JobDetailsController::class, 'deleteJob']);
-	Route::get('/editJob/{id}', [JobDetailsController::class, 'editJob']);
+	Route::get('/editJob/{id}', [RealJobsController::class, 'editJob']);
 	Route::get('/changeName/{id}', [JobController::class, 'changeJobName']);
-	Route::post('/submitJobDetails', [JobDetailsController::class, 'createJobDetails'])->name('submitJobDetails');
+	Route::post('/updatejobdetails', [JobDetailsController::class, 'updateJobDetails'])->name('updatejobdetails');
 	Route::put('/submitChangeJobName/{$id}', [JobController::class, 'submitChangeJobName'])->name('submitChangeJobName');
 	Route::put('/submitChangeJobName/{$id}', [JobController::class, 'submitChangeJobName'])->name('submitChangeJobName');
 	Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');

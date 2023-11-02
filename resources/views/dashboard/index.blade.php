@@ -35,8 +35,8 @@
                                         Welcome {{$name}}
                                         </h5>
                                         <hr>
-                                        <button onclick="generatePDF()" class = "btn btn-success btn-lg"><i class = "fa fa-print"></i>Export Jobs List</button>
-                                        <button onclick="generatePDF()" class = "btn btn-success btn-lg"><i class = "fa fa-print"></i>Reqested Jobs List</button>
+                                        <a class = "btn btn-success btn-lg"><i class = "fa fa-print"></i>Export Jobs List</a>
+                                        <a class = "btn btn-success btn-lg"><i class = "fa fa-print"></i>Reqested Jobs List</a>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                                             <h6 class="text-center mb-0">Last Job Entered</h6>
                                             <hr class="horizontal dark my-3">
                                             @if($latest)
-                                                <h5 class="mb-0">{{ $latest->job }}</h5>
+                                                <h5 class="mb-0">{{ $latest->job_name }}</h5>
                                             @else
                                                 <h5 class="mb-0">No Job Found</h5>
                                             @endif
@@ -100,35 +100,32 @@
                                 <table class="table align-items-center mb-0"  id = "pdf-content">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Name</th>
-                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Created At</th>
-                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Updated At</th>
-                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Add Job Details</th>
-                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Delete Job</th>
+                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Job Name</th>
+                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Shift</th>
+                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Number of People</th>
+                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Date Created</th>
+                                            <th class="text-uppercase  text-xxs font-weight-bolder" style="color:black;">Update Job</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($jobs as $job)
                                             <tr>
                                                 <td>
-                                                    <p class="text-xs font-weight-bold mb-0" style="color:black;">{{ $job->job }}</p>
+                                                    <p class="text-xs font-weight-bold mb-0" style="color:black;">{{ $job->job_name}}</p>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs  mb-0" style="color:black;">{{ $job->created_at }}</p>
+                                                    <p class="text-xs  mb-0" style="color:black;">{{ $job->shift}}</p>
                                                 </td>
                                                 <td>
-                                                    <p class="text-xs mb-0" style="color:black;">{{ $job->updated_at }}</p>
+                                                    <p class="text-xs mb-0" style="color:black;">{{ $job->num_of_people }}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs mb-0" style="color:black;">{{ $job->created_at }}</p>
                                                 </td>
                                                 <td class="align-middle">
                                                     <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
                                                         data-toggle="tooltip" data-original-title="Edit user" style="color:black;">
-                                                        <a href="{{ '/editJob/'. $job->id }}" class = "btn btn btn-outline-dark"><i class = "fa fa-plus"></i>Add</a>
-                                                    </a>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user" style="color:black;">
-                                                        <a href="{{ '/deleteJob/'. $job->id }}" class = "btn btn-dark btn-link"><i class = "fa fa-trash"></i>Delete</a>
+                                                        <a href="{{ '/editJob/'. $job->id }}" class = "btn btn btn-outline-dark"><i class = "fa fa-plus"></i> Update </a>
                                                     </a>
                                                 </td>
                                             </tr>

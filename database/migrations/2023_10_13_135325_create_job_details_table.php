@@ -15,10 +15,12 @@ return new class extends Migration
         Schema::create('job_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('job_id');
-            $table->foreign('job_id')->references('id')->on('jobs');
-            $table->date('date');
-            $table->integer('num_people');
+            $table->foreign('job_id')->references('id')->on('real_jobs');
+            $table->string('job_name');
             $table->string('shift');
+            $table->string('num_of_people');
+            $table->string('updated_people');
+            $table->string('available_people');
             $table->timestamps();
         });
     }

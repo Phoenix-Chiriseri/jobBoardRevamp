@@ -64,6 +64,17 @@ class RealJobsController extends Controller
         return redirect()->back()->with('success', 'Job created successfully');
     }
 
+
+    public function editJob($id)
+    {
+        $name = Auth::user()->name;
+        $jobs = RealJobs::find($id);
+
+    
+        return view('pages.editJob',compact('jobs'));   
+        
+    }
+
     /**
      * Store a newly created resource in storage.
      */

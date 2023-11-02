@@ -1,3 +1,4 @@
+
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
     <x-navbars.sidebar activePage="user-profile"></x-navbars.sidebar>
     <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
@@ -38,42 +39,58 @@
                                     </div>
                                 </div>
                         @endif
-                        <form method='POST' action='{{ route('submitJobDetails') }}'>
+                        <form method='POST' action='{{ route('updatejobdetails') }}'>
                             @csrf
                             <div class="row"> 
                                 <div class="mb-3 col-md-12">
-                                    <label class="form-label">Date</label>
-                                    <input type="date" name="date" class="form-control border border-2 p-2" required>
-                                    @error('date')
+                                    <label class="form-label">Job Name</label>
+                                    <input type="text" name="job_name" class="form-control border border-2 p-2" value="{{$jobs->job_name}}">
+                                    @error('job_name')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                                 </div>  
                             </div>
-                            <p class = "text-center"><strong class = "text-center">For Adding Users:</strong> Put any positive number.</p>
-                            <p class = "text-center"><strong class = "text-center">For Removing Users:</strong> Select a negative number of users from the dropdown.</p>
+
                             <div class="row"> 
                                 <div class="mb-3 col-md-12">
-                                    <label class="form-label">Number Of People</label>
-                                    <input type="text" name="num_people" class="form-control border border-2 p-2" required>
-                                    @error('num_people')
+                                    <label class="form-label">Job ID</label>
+                                    <input type="text" name="job_id" id="job_id" class="form-control border border-2 p-2" value="{{$jobs->id}}" readonly  >
+                                    @error('job_id')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                                 </div>  
                             </div>
-                            <div class="form-group">
-                                <label for="shift">{{ __('Shift') }}</label>
-                                <select class="form-control border border-2 p-2" id="shift" name="shift">
-                                @foreach ($shiftOptions as $value => $text)
-                                <option value="{{ $value }}">{{ $text }}</option>
-                                @endforeach
-                                </select>
-                                @error('shift')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+
+                            <div class="row"> 
+                                <div class="mb-3 col-md-12">
+                                    <label class="form-label">Shift</label>
+                                    <input type="text" name="shift" class="form-control border border-2 p-2" value="{{$jobs->shift}}">
+                                    @error('shift')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
+                                </div>  
                             </div>
-                            <input type="hidden" value = "{{$job->id}}" name="id">
+                           
+                            <div class="row"> 
+                                <div class="mb-3 col-md-12">
+                                    <label class="form-label">Number Of Available People</label>
+                                    <input type="text" name="num_of_people" id="num_of_people" class="form-control border border-2 p-2" value="{{$jobs->num_of_people}}" >
+                                    @error('num_of_people')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                @enderror
+                                </div>  
+                            </div>
+
+                            <div class="row"> 
+                                <div class="mb-3 col-md-12">
+                                    <label class="form-label">People to update</label>
+                                    <input type="text" name="updated_people" id="updated_people" class="form-control border border-2 p-2" >
+                                    @error('updated_people')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                @enderror
+                                </div>  
+                            </div>
+                          
                             <br>
                             <button type="submit" class="btn bg-gradient-dark">Submit</button>
                             <a href="{{ route('dashboard') }}" class="btn btn-outline-dark">Back</a>

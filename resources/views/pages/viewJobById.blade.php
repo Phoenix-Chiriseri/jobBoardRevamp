@@ -89,11 +89,12 @@
                                                         <p class="card-text" style="color:black;">{{ $record->num_of_people }}</p>
                                                     </div>
                                                     <br>
+                                                    <hr> 
                                                     <div class="d-flex justify-content-between">
                                                         <a href="{{ route('requestjob', $job->id) }}" class="class btn btn-success">Request for Job </a>
                                                     </div>
 
-                                                    <hr> <!-- Add this line to insert an <hr> after each record -->
+                                                   <!-- Add this line to insert an <hr> after each record -->
                                                 @endforeach
                                                 <div class="d-flex align-items-center justify-content-between mt-2">
                                                     <div class="avatar-group">
